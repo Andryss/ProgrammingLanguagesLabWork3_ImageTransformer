@@ -3,11 +3,20 @@
 #include "image/transforms/rotate/rotate.h"
 #include "utils/util.h"
 
+/**
+ * Array with messages about execution
+ */
 static const char* const execute_messages[] = {
         [EXECUTE_OK] = "Image transformer successfully finished\n",
         [EXECUTE_ERR] = "Some error occurred during transformer working\n"
 };
 
+/**
+ * MAIN
+ * @param argc - amount of console args
+ * @param argv - console args list
+ * @return execution code
+ */
 int main(const int argc, const char** const argv) {
 
     // Arg checking

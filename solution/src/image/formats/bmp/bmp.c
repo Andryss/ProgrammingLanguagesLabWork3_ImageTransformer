@@ -1,6 +1,9 @@
 
 #include "bmp.h"
 
+/**
+ * Structure of bmp file header
+ */
 #pragma pack(push, 1)
 struct bmp_header
 {
@@ -22,18 +25,35 @@ struct bmp_header
 };
 #pragma pack(pop)
 
+/**
+ * Reads bmp header from file
+ * @param from - file to read header
+ * @param to - header to fill
+ * @return read header status
+ */
 static enum read_status bmp_read_header(FILE* from, struct bmp_header* to) {
     size_t read_count = fread(to, sizeof(struct bmp_header), 1, from);
     if (read_count != 1) return READ_INVALID_HEADER;
     else return READ_OK;
 }
 
+/**
+ * Calculates padding according to width
+ * @param width - just width (really???)
+ * @return padding value
+ */
 uint8_t get_bmp_row_padding(uint64_t width) {
     uint8_t remains = width * sizeof(struct pixel) % 4;
     if (remains == 0) return remains;
     else return 4 - remains;
 }
 
+/**
+ * Reads bmp data (pixels) from file
+ * @param from  - file to read data
+ * @param to - image to fill
+ * @return read data status
+ */
 static enum read_status bmp_read_data(FILE* from, struct image* to) {
     uint64_t width = to->width;
     uint8_t padding = get_bmp_row_padding(width);
@@ -58,6 +78,9 @@ enum read_status bmp_read_image(FILE* from, struct image* to) {
     return bmp_read_data(from, to);
 }
 
+/**
+ * Some defines to not get "MAGIC CONSTANTS" comment
+ */
 #define BF_TYPE 19778
 #define B_OFF_BITS sizeof(struct bmp_header)
 #define BI_SIZE 40
@@ -67,7 +90,13 @@ enum read_status bmp_read_image(FILE* from, struct image* to) {
 #define BI_X_PELS_PER_METER 2835
 #define BI_Y_PELS_PER_METER 2835
 #define BI_CLR_USED 0
+/**
+ * Somehow a magic number enters the bar, and the bartender says "OBJECTION! there are no define"
+ */
 
+/**
+ * Define template for bmp files
+ */
 static const struct bmp_header SIMPLE_HEADER = {
         .bfType = BF_TYPE,
         //.bfileSize = ...,
@@ -86,6 +115,11 @@ static const struct bmp_header SIMPLE_HEADER = {
         .biClrImportant = 0
 };
 
+/**
+ * Creates header according to the given image
+ * @param image - image to use
+ * @return generated header
+ */
 static struct bmp_header create_header(const struct image* image) {
     struct bmp_header header = SIMPLE_HEADER;
     header.biWidth = image->width;
@@ -96,6 +130,12 @@ static struct bmp_header create_header(const struct image* image) {
     return header;
 }
 
+/**
+ * Writes bmp header to file
+ * @param to - file to write header
+ * @param from - image to generate header
+ * @return write header status
+ */
 static enum write_status bmp_write_header(FILE* to, const struct image* from) {
     struct bmp_header header = create_header(from);
     size_t write_count = fwrite(&header, sizeof(struct bmp_header), 1, to);
@@ -103,6 +143,12 @@ static enum write_status bmp_write_header(FILE* to, const struct image* from) {
     return WRITE_OK;
 }
 
+/**
+ * Writes bmp data (pixels) to file
+ * @param to - file to write data
+ * @param from - image to write
+ * @return write data status
+ */
 static enum write_status bmp_write_data(FILE* to, const struct image* from) {
     uint64_t width = from->width;
     uint8_t padding = get_bmp_row_padding(width);
