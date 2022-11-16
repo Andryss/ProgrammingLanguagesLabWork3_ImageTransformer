@@ -1,8 +1,8 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
-#include <stdio.h>
 #include <errno.h>
+#include <stdio.h>
 #include <string.h>
 
 void info(const char* message);
