@@ -1,10 +1,10 @@
 #ifndef FORMATS_EXECUTOR_H_
 #define FORMATS_EXECUTOR_H_
 
-#include <stdio.h>
-#include "../../utils/util.h"
 #include "../../files/files_executor.h"
+#include "../../utils/util.h"
 #include "../image_util.h"
+#include <stdio.h>
 
 enum read_status {
 	READ_OK,

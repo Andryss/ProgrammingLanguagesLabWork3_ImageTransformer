@@ -1,8 +1,8 @@
 #ifndef BMP_H_
 #define BMP_H_
 
-#include <stdio.h>
 #include "../formats_executor.h"
+#include <stdio.h>
 
 enum read_status bmp_read_image(FILE* from, struct image* to);
 

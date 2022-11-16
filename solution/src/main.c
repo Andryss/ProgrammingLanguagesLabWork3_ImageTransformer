@@ -1,7 +1,7 @@
-#include "utils/util.h"
-#include "image/main_executor.h"
 #include "image/formats/bmp/bmp.h"
+#include "image/main_executor.h"
 #include "image/transforms/rotate/rotate.h"
+#include "utils/util.h"
 
 static const char* const execute_messages[] = {
         [EXECUTE_OK] = "Image transformer successfully finished\n",
