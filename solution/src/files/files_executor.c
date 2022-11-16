@@ -1,6 +1,6 @@
 #include "files_executor.h"
 
-enum open_status file_open(FILE** target, char* filename, char* mode) {
+enum open_status file_open(FILE** target, const char* filename, const char* mode) {
     *target = fopen(filename, mode);
     if (*target != NULL) return OPEN_OK;
     return OPEN_ERR;

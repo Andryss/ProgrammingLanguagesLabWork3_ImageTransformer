@@ -1,7 +1,7 @@
 
 #include "rotate.h"
 
-enum transform_status rotate_transform(struct image* from, struct image* to) {
+enum transform_status rotate_transform(const struct image* from, struct image *to) {
 
     *to = image_allocate(from->height, from->width);
 

@@ -13,7 +13,7 @@ enum close_status {
 	CLOSE_ERR
 };
 
-enum open_status file_open(FILE** target, char* filename, char* mode);
+enum open_status file_open(FILE** target, const char* filename, const char* mode);
 
 enum close_status file_close(FILE* target);
 

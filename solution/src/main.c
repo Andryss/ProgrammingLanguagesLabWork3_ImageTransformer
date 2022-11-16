@@ -3,12 +3,12 @@
 #include "image/formats/bmp/bmp.h"
 #include "image/transforms/rotate/rotate.h"
 
-char* execute_messages[] = {
+static const char* const execute_messages[] = {
         [EXECUTE_OK] = "Image transformer successfully finished\n",
         [EXECUTE_ERR] = "Some error occurred during transformer working\n"
 };
 
-int main(int argc, char** argv) {
+int main(const int argc, const char** const argv) {
 
     // Arg checking
     if (argc != 3) {

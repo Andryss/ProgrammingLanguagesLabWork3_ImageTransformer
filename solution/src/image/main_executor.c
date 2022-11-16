@@ -9,7 +9,7 @@ char* transform_errors[] = {
         [TRANSFORM_ERR] = "Some error occurred while transforming image\n"
 };
 
-enum executor_status file_execute(char* filename_src, char* filename_dest, read_image_func read_func, transformer transform, write_image_func write_func) {
+enum executor_status file_execute(const char* filename_src, const char* filename_dest, read_image_func read_func, transformer transform, write_image_func write_func) {
 
     struct image image_src = {0};
 

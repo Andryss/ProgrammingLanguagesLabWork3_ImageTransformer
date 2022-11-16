@@ -22,7 +22,7 @@ struct bmp_header
 };
 #pragma pack(pop)
 
-enum read_status bmp_read_header(FILE* from, struct bmp_header* to) {
+static enum read_status bmp_read_header(FILE* from, struct bmp_header* to) {
     size_t read_count = fread(to, sizeof(struct bmp_header), 1, from);
     if (read_count != 1) return READ_INVALID_HEADER;
     else return READ_OK;
@@ -34,7 +34,7 @@ uint8_t get_bmp_row_padding(uint64_t width) {
     else return 4 - remains;
 }
 
-enum read_status bmp_read_data(FILE* from, struct image* to) {
+static enum read_status bmp_read_data(FILE* from, struct image* to) {
     uint64_t width = to->width;
     uint8_t padding = get_bmp_row_padding(width);
 
@@ -68,7 +68,7 @@ enum read_status bmp_read_image(FILE* from, struct image* to) {
 #define BI_Y_PELS_PER_METER 2835
 #define BI_CLR_USED 0
 
-struct bmp_header SIMPLE_HEADER = {
+static const struct bmp_header SIMPLE_HEADER = {
         .bfType = BF_TYPE,
         //.bfileSize = ...,
         .bfReserved = 0,
@@ -86,7 +86,7 @@ struct bmp_header SIMPLE_HEADER = {
         .biClrImportant = 0
 };
 
-struct bmp_header create_header(struct image* image) {
+static struct bmp_header create_header(const struct image* image) {
     struct bmp_header header = SIMPLE_HEADER;
     header.biWidth = image->width;
     header.biHeight = image->height;
@@ -96,14 +96,14 @@ struct bmp_header create_header(struct image* image) {
     return header;
 }
 
-enum write_status bmp_write_header(FILE* to, struct image* from) {
+static enum write_status bmp_write_header(FILE* to, const struct image* from) {
     struct bmp_header header = create_header(from);
     size_t write_count = fwrite(&header, sizeof(struct bmp_header), 1, to);
     if (write_count != 1) return WRITE_INVALID_HEADER;
     return WRITE_OK;
 }
 
-enum write_status bmp_write_data(FILE* to, struct image* from) {
+static enum write_status bmp_write_data(FILE* to, const struct image* from) {
     uint64_t width = from->width;
     uint8_t padding = get_bmp_row_padding(width);
 
@@ -117,7 +117,7 @@ enum write_status bmp_write_data(FILE* to, struct image* from) {
     return WRITE_OK;
 }
 
-enum write_status bmp_write_image(FILE* to, struct image* from) {
+enum write_status bmp_write_image(FILE* to, const struct image* from) {
     enum write_status write_header_status = bmp_write_header(to, from);
     if (write_header_status != WRITE_OK) return write_header_status;
 

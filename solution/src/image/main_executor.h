@@ -9,7 +9,13 @@ enum executor_status {
 	EXECUTE_ERR
 };
 
-enum executor_status file_execute(char* filename_src, char* filename_dest, read_image_func read_func, transformer transform, write_image_func write_func);
+enum executor_status file_execute(
+        const char* filename_src,
+        const char* filename_dest,
+        read_image_func read_func,
+        transformer transform,
+        write_image_func write_func
+        );
 
 extern char* convert_errors[];
 extern char* transform_errors[];

@@ -1,29 +1,29 @@
 
 #include "formats_executor.h"
 
-char* open_errors[] = {
+const char* const open_errors[] = {
         [OPEN_ERR] = "Some error occurred while opening file\n"
 };
 
-char* read_errors[] = {
+const char* const read_errors[] = {
         [READ_ERR] = "Some error occurred while reading from file\n",
         [READ_INVALID_HEADER] = "Invalid header found\n",
         [READ_INVALID_PADDING] = "Invalid padding found\n",
         [READ_INVALID_SIGNATURE] = "Invalid file signature\n"
 };
 
-char* write_errors[] = {
+const char* const write_errors[] = {
         [WRITE_ERR] = "Some error occurred while writing into file\n",
         [WRITE_INVALID_HEADER] = "Can't write header\n",
         [WRITE_INVALID_PADDING] = "Can't write padding\n",
         [WRITE_INVALID_SIGNATURE] = "Can't resolve signature\n"
 };
 
-char* close_errors[] = {
+const char* const close_errors[] = {
         [CLOSE_ERR] = "Some error occurred while closing file\n"
 };
 
-enum convert_status read_image(char* filename, read_image_func converter, struct image* to) {
+enum convert_status read_image(const char* filename, read_image_func converter, struct image* to) {
     FILE* file = NULL;
     enum open_status open_file_status = file_open(&file, filename, "rb");
     if (open_file_status != OPEN_OK) {
@@ -48,7 +48,7 @@ enum convert_status read_image(char* filename, read_image_func converter, struct
     return CONVERT_OK;
 }
 
-enum convert_status write_image(char* filename, write_image_func converter, struct image* from) {
+enum convert_status write_image(const char* filename, write_image_func converter, const struct image* from) {
     FILE* file = NULL;
     enum open_status open_file_status = file_open(&file, filename, "wb");
     if (open_file_status != OPEN_OK) {

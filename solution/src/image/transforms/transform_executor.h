@@ -8,6 +8,6 @@ enum transform_status {
 	TRANSFORM_ERR
 };
 
-typedef enum transform_status (*transformer)(struct image* from, struct image* to);
+typedef enum transform_status (*transformer)(const struct image* from, struct image* to);
 
 #endif // TRANSFORM_EXECUTOR_H_

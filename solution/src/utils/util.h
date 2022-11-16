@@ -5,12 +5,12 @@
 #include <errno.h>
 #include <string.h>
 
-void info(char* message);
+void info(const char* message);
 
-void error(char* message);
+void error(const char* message);
 
-void error_file(char* filename, char* message);
+void error_file(const char* filename, const char* message);
 
-void error_errno(char* filename);
+void error_errno(const char* filename);
 
 #endif //UTIL_H_

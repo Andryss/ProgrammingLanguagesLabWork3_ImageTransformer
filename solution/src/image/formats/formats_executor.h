@@ -23,19 +23,19 @@ enum write_status {
 };
 
 typedef enum read_status (*read_image_func)(FILE* from, struct image* to);
-typedef enum write_status (*write_image_func)(FILE* to, struct image* from);
+typedef enum write_status (*write_image_func)(FILE* to, const struct image* from);
 
 enum convert_status {
 	CONVERT_OK,
 	CONVERT_ERR
 };
 
-enum convert_status read_image(char* filename, read_image_func converter, struct image* to);
-enum convert_status write_image(char* filename, write_image_func converter, struct image* from);
+enum convert_status read_image(const char* filename, read_image_func converter, struct image* to);
+enum convert_status write_image(const char* filename, write_image_func converter, const struct image* from);
 
-extern char* open_errors[];
-extern char* read_errors[];
-extern char* write_errors[];
-extern char* close_errors[];
+extern const char* const open_errors[];
+extern const char* const read_errors[];
+extern const char* const write_errors[];
+extern const char* const close_errors[];
 
 #endif // FORMATS_EXECUTOR_H_

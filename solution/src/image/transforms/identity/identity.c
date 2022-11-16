@@ -1,7 +1,7 @@
 
 #include "identity.h"
 
-enum transform_status identity_transform(struct image* from, struct image* to) {
+enum transform_status identity_transform(const struct image* from, struct image* to) {
 
     *to = image_allocate(from->width, from->height);
 
