@@ -7,7 +7,7 @@
  * Enum of transform image statuses
  */
 enum transform_status {
-	TRANSFORM_OK,
+	TRANSFORM_OK = 0,
 	TRANSFORM_ERR
 };
 

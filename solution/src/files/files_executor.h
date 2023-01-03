@@ -7,7 +7,7 @@
  * Enum of file open statuses
  */
 enum open_status {
-	OPEN_OK,
+	OPEN_OK = 0,
 	OPEN_ERR
 };
 
@@ -15,7 +15,7 @@ enum open_status {
  * Enum of file close statuses
  */
 enum close_status {
-	CLOSE_OK,
+	CLOSE_OK = 0,
 	CLOSE_ERR
 };
 

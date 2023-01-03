@@ -79,17 +79,19 @@ enum read_status bmp_read_image(FILE* from, struct image* to) {
 }
 
 /**
- * Some defines to not get "MAGIC CONSTANTS" comment
+ * Some define-enum to not get "MAGIC CONSTANTS" comment
  */
-#define BF_TYPE 19778
-#define B_OFF_BITS sizeof(struct bmp_header)
-#define BI_SIZE 40
-#define BI_PLANES 1
-#define BI_BIT_COUNT 24
-#define BI_COMPRESSION 0
-#define BI_X_PELS_PER_METER 2835
-#define BI_Y_PELS_PER_METER 2835
-#define BI_CLR_USED 0
+enum BMP_DEFAULTS {
+    BF_TYPE = 19778,
+    B_OFF_BITS = sizeof(struct bmp_header),
+    BI_SIZE = 40,
+    BI_PLANES = 1,
+    BI_BIT_COUNT = 24,
+    BI_COMPRESSION = 0,
+    BI_X_PELS_PER_METER = 2835,
+    BI_Y_PELS_PER_METER = 2835,
+    BI_CLR_USED = 0
+};
 /**
  * Somehow a magic number enters the bar, and the bartender says "OBJECTION! there are no define"
  */

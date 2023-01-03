@@ -8,8 +8,9 @@ struct image image_allocate(const uint64_t width, const uint64_t height) {
     });
 }
 
-void image_free(const struct image* image) {
+void image_free(struct image* image) {
     free(image->data);
+    image->data = NULL;
 }
 
 struct pixel* image_get_pixel(const struct image* from, const uint64_t row, const uint64_t col) {

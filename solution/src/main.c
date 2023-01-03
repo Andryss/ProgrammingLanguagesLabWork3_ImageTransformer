@@ -2,6 +2,7 @@
 #include "image/main_executor.h"
 #include "image/transforms/rotate/rotate.h"
 #include "utils/util.h"
+#include <sysexits.h>
 
 /**
  * Array with messages about execution
@@ -22,7 +23,7 @@ int main(const int argc, const char** const argv) {
     // Arg checking
     if (argc != 3) {
         error("Incorrect usage. Try this: image-transformer <source image> <destination image>\n");
-        return 0;
+        return EX_USAGE;
     }
 
     // Invoke main function
@@ -38,9 +39,9 @@ int main(const int argc, const char** const argv) {
     // Print computation result
     if (image_execute_status != EXECUTE_OK) {
         error(execute_messages[image_execute_status]);
+        return EX__BASE;
     } else {
         info(execute_messages[EXECUTE_OK]);
+        return EX_OK;
     }
-
-    return 0;
 }

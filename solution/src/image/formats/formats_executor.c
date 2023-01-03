@@ -35,16 +35,18 @@ enum convert_status read_image(const char* filename, read_image_func converter, 
 
     // Try to read image with given converter
     enum read_status read_image_status = converter(file, to);
-    if (read_image_status != READ_OK) {
-        error_file(filename, read_errors[read_image_status]);
-        return CONVERT_ERR;
-    }
 
-    // Try to close file
+    // Try to close file (doesn't depend on conversion result)
     enum close_status close_file_status = file_close(file);
     if (close_file_status != CLOSE_OK) {
         error_errno(filename);
         error_file(filename, close_errors[close_file_status]);
+        return CONVERT_ERR;
+    }
+
+    // If conversion failed
+    if (read_image_status != READ_OK) {
+        error_file(filename, read_errors[read_image_status]);
         return CONVERT_ERR;
     }
 
@@ -63,16 +65,18 @@ enum convert_status write_image(const char* filename, write_image_func converter
 
     // Try to write image with given converter
     enum write_status write_image_status = converter(file, from);
-    if (write_image_status != WRITE_OK) {
-        error_file(filename, write_errors[write_image_status]);
-        return CONVERT_ERR;
-    }
 
-    // Try to close file
+    // Try to close file (doesn't depend on conversion result)
     enum close_status close_file_status = file_close(file);
     if (close_file_status != CLOSE_OK) {
         error_errno(filename);
         error_file(filename, close_errors[close_file_status]);
+        return CONVERT_ERR;
+    }
+
+    // If conversion failed
+    if (write_image_status != WRITE_OK) {
+        error_file(filename, write_errors[write_image_status]);
         return CONVERT_ERR;
     }
 

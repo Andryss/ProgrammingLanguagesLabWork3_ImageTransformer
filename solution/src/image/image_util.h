@@ -7,7 +7,7 @@
 /**
  * Pixel structure
  */
-#pragma pack(push, 1)
+#pragma pack(push, 1) // __attribute__((packed)) for windows
 struct pixel {
 	uint8_t g, b, r;
 };
@@ -33,7 +33,7 @@ struct image image_allocate(const uint64_t width, const uint64_t height);
  * Free memory in the heap for the given image
  * @param image - image we want to dislocate
  */
-void image_free(const struct image* image);
+void image_free(struct image* image);
 
 /**
  * Return a pointer to an image pixel by row and column

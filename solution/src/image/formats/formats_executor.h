@@ -10,7 +10,7 @@
  * Enum of file read statuses
  */
 enum read_status {
-	READ_OK,
+	READ_OK = 0,
 	READ_ERR,
     READ_INVALID_HEADER,
     READ_INVALID_SIGNATURE,
@@ -21,7 +21,7 @@ enum read_status {
  * Enum of file write statuses
  */
 enum write_status {
-	WRITE_OK,
+	WRITE_OK = 0,
 	WRITE_ERR,
 	WRITE_INVALID_HEADER,
 	WRITE_INVALID_SIGNATURE,
@@ -47,7 +47,7 @@ typedef enum write_status (*write_image_func)(FILE* to, const struct image* from
  * Enum of file convert statuses (conversion is: file -> image, image -> file)
  */
 enum convert_status {
-	CONVERT_OK,
+	CONVERT_OK = 0,
 	CONVERT_ERR
 };
 
